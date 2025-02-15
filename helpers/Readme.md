@@ -50,6 +50,20 @@ The chain starts with audit.primary_key_columns and audit.to_record_id, which wo
 ## Usage Examples
 Users table DDL:
 ```sql
+CREATE TABLE "Users" (
+  "id" SERIAL PRIMARY KEY,
+  "tenant_id" int NOT NULL,
+  "email" varchar(255) NOT NULL,
+  "password_hash" varchar(255) NOT NULL,
+  "role_id" int,
+  "is_email_confirmed" boolean NOT NULL DEFAULT false,
+  "created_datetime" TIMESTAMP DEFAULT (now() at time zone 'utc'),
+  "modified_datetime" TIMESTAMP DEFAULT (now() at time zone 'utc'),
+  "is_blocked" boolean NOT NULL DEFAULT false,
+  "first_name" varchar(255) NOT NULL,
+  "last_name" varchar(255) NOT NULL,
+  "is_password_set" boolean DEFAULT false
+);
 ```
 
 I've ommited data insertion/updates for brevity
